@@ -28,15 +28,13 @@ This is an app that is responsible for improving the patient-psychologist digita
 | `/`                       | WelcomePage          | public `<Route>`            | Home page                                                    |
 | `/signup`                 | SignupPage           | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to profile after signup |
 | `/login`                  | LoginPage            | patient and pshycologist `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login |
-| `/tournaments`            | TournamentListPage   | user only `<PrivateRoute>`  | Shows all tournaments in a list                              |
-| `/tournaments/add`        | TournamentListPage   | user only `<PrivateRoute>`  | Edits a tournament                                           |
-| `/tournaments/:id`        | TournamentDetailPage | user only `<PrivateRoute>`  | Details of a tournament to edit                              |
-| `/tournament/:id`         | n/a                  | user only `<PrivateRoute>`  | Delete tournament                                            |
-| `/tournament/players`     | PlayersListPage      | user only  `<PrivateRoute>` | List of players of a tournament                              |
-| `/tournament/players/add` | PlayersListPage      | user only `<PrivateRoute>`  | Add a player to the tournament                               |
-| `/tournament/players/:id` | PlayersDetailPage    | user only `<PrivateRoute>`  | Edit player for tournament                                   |
-| `/tournament/players/:id` | PlayersListPage      | user only  `<PrivateRoute>` | Delete player from tournament                                |
-| `/tournament/tableview`   | TableView            | user only  `<PrivateRoute>` | Games view and brackets                                      |
-| `/tournament/ranks`       | RanksPage            | user only `<PrivateRoute>`  | Ranks list                                                   |
-| `/tournament/game`        | GameDetailPage       | user only `<PrivateRoute>`  | Game details                                                 |
+| `/activity-one`           | ActivityOnePage   | patient only `<PrivateRoute>`  | Shows the daily activity.                             |
+| `/activity-two`        | ActivityTwoPage   | patient only `<PrivateRoute>`  | Shows the daily activity.                                           |
+| `/profile`        | ProfilePage | pshycologist only `<PrivateRoute>`  | Pshycologist profile                           |
+| `/profile/:id`         | PatientProfilePage                  | pshycologist only `<PrivateRoute>`  | See the patient's profile                                   
+| `/profile/add`     | AddPatientPage      | pshycologist only  `<PrivateRoute>` | Add a patient                              |
+| `/profile/patients/:id` | EditPatientPage      | pshycologist only `<PrivateRoute>`  | Edit a patient                               |
+| `/profile/patients/:id` | DeletePatientPage      | pshycologist only `<PrivateRoute>`  | Delete a patient                               |     
+| `/profile/patients/:id` | DeletePatientPage      | pshycologist only `<PrivateRoute>`  | Delete a patient                               |       
+| `/profile/activity/:id` | ActivityResultsPage      | pshycologist only `<PrivateRoute>`  | Activity results page                               |    
 
