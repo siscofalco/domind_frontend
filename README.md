@@ -26,7 +26,7 @@ This is an app that is responsible for improving the patient-psychologist digita
 | Path                      | Component            | Permissions                 | Behavior                                                     |
 | ------------------------- | -------------------- | --------------------------- | ------------------------------------------------------------ |
 | `/`                       | WelcomePage          | public `<Route>`            | Home page                                                    |
-| `/signup`                 | SignupPage           | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to profile after signup |
+| `/signup`                 | SignupPage           | patient only  `<AnonRoute>`    | Signup form, link to login, navigate to profile after signup |
 | `/login`                  | LoginPage            | patient and pshycologist `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login |
 | `/activity-one`           | ActivityOnePage   | patient only `<PrivateRoute>`  | Shows the daily activity.                             |
 | `/activity-two`        | ActivityTwoPage   | patient only `<PrivateRoute>`  | Shows the daily activity.                                           |
@@ -34,7 +34,100 @@ This is an app that is responsible for improving the patient-psychologist digita
 | `/profile/:id`         | PatientProfilePage                  | pshycologist only `<PrivateRoute>`  | See the patient's profile                                   
 | `/profile/add`     | AddPatientPage      | pshycologist only  `<PrivateRoute>` | Add a patient                              |
 | `/profile/patients/:id` | EditPatientPage      | pshycologist only `<PrivateRoute>`  | Edit a patient                               |
-| `/profile/patients/:id` | DeletePatientPage      | pshycologist only `<PrivateRoute>`  | Delete a patient                               |     
-| `/profile/patients/:id` | DeletePatientPage      | pshycologist only `<PrivateRoute>`  | Delete a patient                               |       
-| `/profile/activity/:id` | ActivityResultsPage      | pshycologist only `<PrivateRoute>`  | Activity results page                               |    
+| `/profile/patients/:id` | DeletePatientPage      | pshycologist only `<PrivateRoute>`  | Delete a patient                           |       
+| `/profile/activity/:id` | ActivityResultsPage      | pshycologist only `<PrivateRoute>`  | Activity results page                               | 
+
+## Components
+
+- WelcomePage
+- SignupPage
+- LoginPage
+- ActivityOnePage
+- ActivityTwoPage
+- ProfilePage
+- PatientProfilePage
+- AddPatientPage
+- EditPatientPage
+- DeletePatientPage
+- ActivityResultsPage
+
+## Models
+
+patient model
+
+```javascript
+{
+  name: {type: String, required: true, unique: true},
+  username: {type: String, required: true, unique: true},
+  email: {type: String, required: true, unique: true},
+  mobilephone: {type: String, required: true, unique: true},
+}
+```
+
+Psychologist model
+
+```javascript
+{
+  name: {type: String, required: true, unique: true},
+  username: {type: String, required: true, unique: true},
+  email: {type: String, required: true, unique: true},
+  mobilephone: {type: String, required: true, unique: true},
+}
+```
+Activity Two model
+
+```javascript
+{
+  description: {type: String, required: true},
+}
+```
+
+Session model
+
+```javascript
+{
+  description: {type: String, required: true},
+}
+```
+
+<br>
+
+## API Endpoints (backend routes)
+
+| HTTP Method | URL                         | Request Body                 | Success status | Error Status | Description                                                  |
+| ----------- | --------------------------- | ---------------------------- | -------------- | ------------ | ------------------------------------------------------------ |
+| POST        | `/auth/signup`                | {username, password,...}      | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/auth/login`                 | {username, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session |
+| POST        | `/auth/logout`                | (empty)                      | 204            | 400          | Logs out the user                                            |
+| GET         | `/api/patients`                |                              |                | 400          | Show all patients                                         |
+| GET         | `/api/patients/:id`            | {id}                         |                |              | Show specific patient                                     |
+| POST        | `/api/patients` | {}                           | 201            | 400          | Create and save a new patient                             |
+| PUT         | `/api/patients/:id`       | {name,email,username}           | 200            | 400          | edit patient                                              |
+| DELETE      | `/api/patient/:id`     | {id}                         | 201            | 400          | delete patient                                            |
+| GET         | `/api/activities`                    |                              |                | 400          | show activities                                                 |
+| GET         | `/api/activities/:id`                | {id}                         |                |              | show specific activity                                         |
+| POST        | `/api/session`         | {description}      | 200            | 404          | add session                                                   |
+| PUT         | `/api/session/:id`           | {description}                   | 201            | 400          | view session                   |
+
+
+<br>
+
+## Links
+
+### Trello/Kanban
+
+[Link to your trello board](https://trello.com/b/loyGvBFp/domind)
+or picture of your physical board
+
+### Git
+
+The url to your repository and to your deployed project
+
+[Deployed App Link](http://heroku.com)
+
+### Slides
+
+The url to your presentation slides
+
+[Slides Link](http://slides.com)
 
