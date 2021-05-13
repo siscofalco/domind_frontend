@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Session = require('../models/Session.model');
+const Patient = require('../models/Patient.model');
 
 // create Session
 
 router.post('/create', (req, res, next) => {
-    const { comment } = req.body;
+    const { comment, patient } = req.body;
 
-    Session.create({
-        comment
-        })
+    Session.create({comment, patient})
         .then((newSession) => {
-            return res.status(200).json(newSession);
+            Patient.updateOne({_id: patient}, {$addToSet: {sessions: newSession._id}}, {new: true})
+            .then(() => {
+                return res.status(200).json(newSession)
+            })
+            .catch(error => res.status(500).json(error))
         })
         .catch(error => res.status(500).json(error))
 })

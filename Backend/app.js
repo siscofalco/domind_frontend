@@ -19,11 +19,13 @@ const doctorRouter = require('./routes/doctor.routes');
 const patientRouter = require('./routes/patient.routes');
 const activityRouter = require('./routes/activity.routes');
 const diaryRouter = require('./routes/diary.routes');
+const sessionRouter = require('./routes/session.routes');
 app.use('/api/auth', authRouter);
 app.use('/api/doctor', doctorRouter);
 app.use('/api/patient', patientRouter);
 app.use('/api/activity', activityRouter);
 app.use('/api/diary', diaryRouter);
+app.use('/api/session', sessionRouter);
 
 //  Catch 404 and respond with error message
 app.use((req, res, next) => {
