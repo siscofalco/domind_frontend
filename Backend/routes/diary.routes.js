@@ -1,17 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const Diary = require('../models/Diary.model');
+const Patient = require('../models/Patient.model');
 
 // create Diary
 
 router.post('/create', (req, res, next) => {
-    const { comment } = req.body;
+    const { comment, patient } = req.body;
 
-    Diary.create({
-        comment
-        })
+    Diary.create({comment, patient})
         .then((newDiary) => {
-            return res.status(200).json(newDiary);
+            Patient.updateOne({_id: patient}, {$addToSet: {diary: newDiary._id}}, {new: true})
+            .then(() => {
+                return res.status(200).json(newDiary)
+            })
+            .catch(error => res.status(500).json(error))
         })
         .catch(error => res.status(500).json(error))
 })
