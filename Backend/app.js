@@ -14,10 +14,12 @@ require('./configs/cors.config')(app);
 require('./configs/session.config')(app);
 require('./configs/passport.config')(app);
 
-const userRouter = require('./routes/user.routes');
 const authRouter = require('./routes/auth.routes');
-app.use('/api/user', userRouter); // /api all routes start with /api
+const doctorRouter = require('./routes/doctor.routes');
+const patientRouter = require('./routes/patient.routes');
 app.use('/api/auth', authRouter);
+app.use('/api/doctor', doctorRouter);
+app.use('/api/patient', patientRouter);
 
 //  Catch 404 and respond with error message
 app.use((req, res, next) => {

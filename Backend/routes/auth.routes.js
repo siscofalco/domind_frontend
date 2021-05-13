@@ -4,24 +4,23 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const uploader = require('../configs/cloudinary.config');
 const Patient = require('../models/Patient.model');
+const Doctor = require('../models/Doctor.model');
 const bcryptSalt = 10;
 
-// PATIENT ROUTES
+// Sign up patient
 
-// create one
+router.post('/signup-patient', (req, res, next) => {
+  const { username, name, password, birthdate, email } = req.body;
 
-router.post('/signup', (req, res, next) => {
-  const { username, name, email, password, age, activities } = req.body;
-
-  if(password.length < 6){
-    return res.status(400).json({ message: 'Please make the password at least 6 characters long'});
+  if(password.length < 5){
+    return res.status(400).json({ message: 'Please make the password at least 5 characters long'});
   }
 
-  if(!username || !email){
+  if(!username || !name || !password || !birthdate || !email){
     return res.status(400).json({ message: 'Please fill all the fields in the form'});
   }
 
-  Patient.findOne({ email })
+  Patient.findOne({ username })
   .then(user => {
     if(user){
       return res.status(400).json({ message: 'User already exists. Please change your email'});
@@ -33,24 +32,65 @@ router.post('/signup', (req, res, next) => {
     Patient.create({
       username,
       name,
-      email,
       password: hashPass,
-      age,
-      activities,
+      birthdate,
+      email,
+      doctor: req.session.currentUser._id
     })
-    .then((newUser) => {
-      // Passport req.login permite iniciar sesión tras crear el usuario
-      req.login(newUser, (error) => {
+    .then((newPatient) => {
+      req.login(newPatient, (error) => {
         if(error){
           return res.status(500).json(error)
         }
-
-        return res.status(200).json(newUser);
+        return res.status(200).json(newPatient);
       })
     })
     .catch(error => res.status(500).json(error))
   })
 })
+
+// Sign up doctor
+
+router.post('/signup-doctor', (req, res, next) => {
+  const { username, name, password, mobilephone, email } = req.body;
+
+  if(password.length < 5){
+    return res.status(400).json({ message: 'Please make the password at least 5 characters long.'});
+  }
+
+  if(!username || !name || !password || !mobilephone || !email){
+    return res.status(400).json({ message: 'Please fill all the fields in the form.'});
+  }
+
+  Doctor.findOne({ username })
+  .then(doctor => {
+    if(doctor){
+      return res.status(400).json({ message: 'User already exists.'});
+    }
+
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    Doctor.create({
+      username,
+      name,
+      password: hashPass,
+      mobilephone,
+      email
+    })
+    .then((newDoctor) => {
+      req.login(newDoctor, (error) => {
+        if(error){
+          return res.status(500).json(error)
+        }
+        return res.status(200).json(newDoctor);
+      })
+    })
+    .catch(error => res.status(500).json(error))
+  })
+})
+
+// Patient & doctor login
 
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (error, theUser, failureDetails) => {
@@ -66,15 +106,16 @@ router.post('/login', (req, res, next) => {
       if(error){
         return res.status(500).json(error);
       }
-
+      req.session.currentUser = theUser;
       return res.status(200).json(theUser);
     })
 
   })(req, res, next)
 })
 
+// Patient & doctor logout
+
 router.post('/logout', (req, res, next) => {
-  // req.logout is defined by passport
   req.logout();
   return res.status(200).json({ message: 'Log out success!'});
 })
