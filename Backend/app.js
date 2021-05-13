@@ -17,9 +17,11 @@ require('./configs/passport.config')(app);
 const authRouter = require('./routes/auth.routes');
 const doctorRouter = require('./routes/doctor.routes');
 const patientRouter = require('./routes/patient.routes');
+const activityRouter = require('./routes/activity.routes');
 app.use('/api/auth', authRouter);
 app.use('/api/doctor', doctorRouter);
 app.use('/api/patient', patientRouter);
+app.use('/api/activity', activityRouter);
 
 //  Catch 404 and respond with error message
 app.use((req, res, next) => {

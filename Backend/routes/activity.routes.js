@@ -1,22 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const Activity = require('../models/Activity.model');
+const Patient = require('../models/Patient.model');
 
 // create activity
 
 router.post('/create', (req, res, next) => {
-    const { date, questions, answers, image } = req.body;
+    const { questions, image, patient } = req.body;
 
     Activity.create({
         date : Date.now(),
         questions,
-        answers,
         image,
-        })
-        .then((newActivity) => {
-            return res.status(200).json(newActivity);
+        patient,
+    })
+    .then((newActivity) => {
+        Patient.updateOne({_id: patient}, {$addToSet: {activities: newActivity._id}}, {new: true})
+        .then(() => {
+            return res.status(200).json(newActivity)
         })
         .catch(error => res.status(500).json(error))
+    })
+    .catch(error => res.status(500).json(error))
 })
 
 // delete activity
@@ -39,8 +44,9 @@ router.get('/:id', (req, res, next) => {
 
 // Update activity
 
-router.put('/edit', uploader.single('photo'), (req, res, next) => {
-    Activity.findOneAndUpdate({ _id: id }, { new: true })
+router.put('/edit/:id', (req, res, next) => {
+    const { id } = req.params;
+    Activity.findOneAndUpdate({ _id: id }, req.body, { new: true })
     .then(user => res.status(200).json(user))
     .catch(error => res.status(500).json(error))
 })
