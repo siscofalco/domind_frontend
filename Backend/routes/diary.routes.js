@@ -23,12 +23,13 @@ router.post('/create', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
-    Diary.findOneAndRemove({ _id: id })
-    .then(() => {
-        return res.status(200).json({message: "Diary deleted"});
-        
+    Diary.deleteOne({ _id: id })
+    .then((diary) => {
+        Patient.updateOne(diary.patient, { $pull: { diary: id } })
+        .then(() => {
+            return res.status(200).json({message: "Diary deleted"});
+        })
     })
-    .catch(error => res.status(500).json(error))
 })
 
 // See Diary

@@ -23,9 +23,13 @@ router.post('/create', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
-    Session.findOneAndRemove({ _id: id })
-    .then(() => res.status(200).json({message: "Session deleted"}))
-    .catch(error => res.status(500).json(error))
+    Session.deleteOne({ _id: id })
+    .then((session) => {
+        Patient.updateOne(session.patient, { $pull: { sessions: id } })
+        .then(() => {
+            return res.status(200).json({message: "Session deleted"});
+        })
+    })
 })
 
 // See Session
