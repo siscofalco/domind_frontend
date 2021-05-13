@@ -24,7 +24,10 @@ router.post('/create', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
     Diary.findOneAndRemove({ _id: id })
-    .then(() => res.status(200).json({message: "Diary deleted"}))
+    .then(() => {
+        return res.status(200).json({message: "Diary deleted"});
+        
+    })
     .catch(error => res.status(500).json(error))
 })
 

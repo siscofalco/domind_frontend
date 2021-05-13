@@ -28,8 +28,13 @@ router.post('/create', (req, res, next) => {
 
 router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
-    Activity.findOneAndRemove({ _id: id })
-    .then(() => res.status(200).json({message: "Activity deleted"}))
+    Activity.deleteOne({ _id: id })
+    .then((activity) => {
+        Patient.updateOne(activity.patient, { $pull: { activities: id } })
+        .then(() => {
+            return res.status(200).json({message: "Activity deleted"});
+        })
+    })
     .catch(error => res.status(500).json(error))
 })
 
