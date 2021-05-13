@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const sessionSchema = new Schema ({
     comment: { type: String, required: true },
-    patient: [{ type: Schema.Types.ObjectId, ref: 'Patient' }]
+    patient: { type: Schema.Types.ObjectId, ref: 'Patient' }
 })
 
 const Session = mongoose.model('Session', sessionSchema);

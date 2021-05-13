@@ -6,5 +6,5 @@ const diarySchema = new Schema ({
     patient: { type: Schema.Types.ObjectId, ref: 'Patient' }
 })
 
-const Diary = mongoose.model('Session', diarySchema);
+const Diary = mongoose.model('Diary', diarySchema);
 module.exports = Diary;
