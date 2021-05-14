@@ -114,7 +114,7 @@ Session model
 
 ## Links
 
-### Trello/Kanban
+### Trello
 
 [Link to your trello board](https://trello.com/b/loyGvBFp/domind)
 or picture of your physical board
