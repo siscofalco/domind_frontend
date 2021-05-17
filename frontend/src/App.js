@@ -5,15 +5,17 @@ import AnonRoute from './components/routes/AnonRoutes';
 import PrivateRoute from './components/routes/PrivateRoutes';
 import UserSelector from './components/UserSelector';
 import './App.css';
+import DoctorProfile from './pages/profile/DoctorProfile';
+import PatientProfile from './pages/profile/PatientProfile';
 
 function App() {
   return (
     <div className="App">
       <Route exact path="/" component={() => (<p>Hola</p>)} />
       <PrivateRoute exact path="/user-selector" component={UserSelector} />
-      <PrivateRoute exact path="/doctor-profile/:id" component={UserSelector} />
-      <PrivateRoute exact path="/patient-profile/:id" component={UserSelector} />
-      <AnonRoute exact path="/signup" component={Signup} redirectPath="/" />
+      <PrivateRoute path="/doctor-profile" component={DoctorProfile} />
+      <PrivateRoute path="/patient-profile" component={PatientProfile} />
+      <AnonRoute exact path="/signup" component={Signup} />
       <AnonRoute exact path="/login" component={Login} />
     </div>
   );

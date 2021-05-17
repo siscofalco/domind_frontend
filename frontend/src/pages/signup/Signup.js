@@ -11,6 +11,14 @@ const validators = {
 
     return message;
   },
+  name: (value) => {
+    let message;
+    if(!value){
+      message = 'Name is required';
+    }
+
+    return message;
+  },
   email: (value) => {
     let message;
     if(!value){
@@ -31,6 +39,16 @@ const validators = {
 
     return message;
   },
+  mobilephone: (value) => {
+    let message;
+    if(!value){
+      message = 'Phone number is required';
+    } else if(value.length < 9){
+      message = 'Invalid phone number'
+    }
+
+    return message;
+  },
 }
 
 class Signup extends Component {
@@ -39,13 +57,19 @@ class Signup extends Component {
     this.state = {
       fields: {
         username: "",
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        mobilephone: null,
+        email: "",
       },
       errors: {
         username: null,
+        name: null,
         email: null,
-        password: null
+        password: null,
+        mobilephone: null,
+        email: null,
       }
     }
   }
@@ -55,8 +79,6 @@ class Signup extends Component {
     console.log(this.state.fields);
     const data = {
         ...this.state.fields,
-        name: 'Martina',
-        mobilephone: 99999999,
     };
     this.props.signup(data);
   }
@@ -85,13 +107,23 @@ class Signup extends Component {
         </div>
 
         <div className="form-item">
-          <label htmlFor="email">Email: </label>
-          <input type="text" name="email" value={fields.email} onChange={(e) => this.handleChange(e)} />
+          <label htmlFor="name">Name: </label>
+          <input type="text" name="name" value={fields.name} onChange={(e) => this.handleChange(e)} />
         </div>
 
         <div className="form-item">
           <label htmlFor="password">Password: </label>
           <input type="password" name="password" value={fields.password} onChange={(e) => this.handleChange(e)} />
+        </div>
+
+        <div className="form-item">
+          <label htmlFor="mobilephone">Mobilephone: </label>
+          <input type="tel" name="mobilephone" value={fields.mobilephone} onChange={(e) => this.handleChange(e)} />
+        </div>
+
+        <div className="form-item">
+          <label htmlFor="email">Email: </label>
+          <input type="text" name="email" value={fields.email} onChange={(e) => this.handleChange(e)} />
         </div>
 
         <button type="submit">
