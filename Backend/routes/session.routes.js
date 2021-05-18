@@ -8,7 +8,7 @@ const Patient = require('../models/Patient.model');
 router.post('/create', (req, res, next) => {
     const { comment, patient } = req.body;
 
-    Session.create({comment, patient})
+    Session.create({comment, patient, date: Date.now()})
         .then((newSession) => {
             Patient.updateOne({_id: patient}, {$addToSet: {sessions: newSession._id}}, {new: true})
             .then(() => {

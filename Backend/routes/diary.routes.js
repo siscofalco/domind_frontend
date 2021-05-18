@@ -8,7 +8,11 @@ const Patient = require('../models/Patient.model');
 router.post('/create', (req, res, next) => {
     const { comment, patient } = req.body;
 
-    Diary.create({comment, patient})
+    Diary.create({
+        comment, 
+        patient,
+        date : Date.now()
+    })
         .then((newDiary) => {
             Patient.updateOne({_id: patient}, {$addToSet: {diary: newDiary._id}}, {new: true})
             .then(() => {
