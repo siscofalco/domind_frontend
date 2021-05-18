@@ -38,14 +38,12 @@ router.post('/signup-patient', (req, res, next) => {
       doctor: req.session.currentUser._id
     })
     .then((newPatient) => {
-      req.login(newPatient, (error) => {
-        if(error){
-          return res.status(500).json(error)
-        }
-        return res.status(200).json(newPatient);
-      })
+      Doctor.updateOne({_id: req.session.currentUser._id}, {$addToSet: {patients: newPatient._id}}, {new: true})
+        .then(() => {
+          return res.status(200).json(newPatient);
+        })
+        .catch(error => res.status(500).json(error))
     })
-    .catch(error => res.status(500).json(error))
   })
 })
 

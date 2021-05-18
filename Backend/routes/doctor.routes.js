@@ -14,7 +14,7 @@ router.put('/edit', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
     const { id } = req.params;
-    Doctor.findOne({ _id: id })
+    Doctor.findOne({ _id: id }).populate('patients')
     .then(data => res.status(200).json(data))
     .catch(error => res.status(500).json(error))
 })
