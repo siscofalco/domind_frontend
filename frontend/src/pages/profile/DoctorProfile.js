@@ -14,7 +14,6 @@ class DoctorProfile extends Component {
         };
     }
 
-
     componentDidMount(){
         const id = this.props.match.params.id;
         const doctorService = new DoctorService();
