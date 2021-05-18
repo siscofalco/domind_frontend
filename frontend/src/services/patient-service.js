@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class DoctorService {
+export default class PatientService {
     constructor(){
         this.instance = axios.create({
             baseURL: `${process.env.REACT_APP_API_URL}/patient`,
@@ -14,5 +14,9 @@ export default class DoctorService {
 
     editPatient(body) {
         return(this.instance.put(body))
+    }
+
+    deletePatient(id) {
+        return(this.instance.delete(`/${id}`))
     }
 }

@@ -12,7 +12,7 @@ import PatientDetails from './pages/profile/PatientDetails';
 function App() {
   return (
     <div className="App">
-      <Route exact path="/" component={() => (<p>Hola</p>)} />
+      <Route exact path="/" component={Login} />
       <PrivateRoute exact path="/user-selector" component={UserSelector} />
       <PrivateRoute path="/doctor-profile/:id" component={DoctorProfile} />
       <PrivateRoute path="/patient-profile/:id" component={PatientProfile} />

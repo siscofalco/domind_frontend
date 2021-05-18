@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { withAuth } from '../../context/auth.context';
 import PatientService from '../../services/patient-service';
+import ActivityService from '../../services/activity-service';
+import SessionService from '../../services/session-service';
 import BaseModal from '../../components/modals/BaseModal';
 import SeeActivityModal from '../../components/modals/SeeActivityModal';
 import CreateActivityModal from '../../components/modals/CreateActivityModal';
@@ -64,12 +66,49 @@ class PatientDetails extends Component {
         })
     }
 
+    deleteActivity(activity){
+        const id = activity._id;
+        const activityService = new ActivityService();
+        activityService.deleteActivity(id)
+        .then(() => {
+            this.getPatientData();
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    deleteSession(session){
+        const id = session._id;
+        const sessionService = new SessionService();
+        sessionService.deleteSession(id)
+        .then(() => {
+            this.getPatientData();
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    deletePatient(){
+        const id = this.state.patient._id;
+        const patientService = new PatientService();
+        patientService.deletePatient(id)
+        .then(() => {
+            window.location.href = '/user-selector';
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     render() {
         return(
             <div>
                 <div>
                     <h1>{this.state.patient.name}</h1>
                     <p>{this.state.patient.email}</p>
+                    <button onClick={() => {this.deletePatient(this)}}>Delete patient</button>
                 </div>
                 <div>
                     <div>
@@ -82,6 +121,7 @@ class PatientDetails extends Component {
                                 <div>
                                     <h2>{getDateFormat(item.date)}</h2>
                                     <button onClick={() => {this.seeActivityModal(item)}}>See activity</button>
+                                    <button onClick={() => {this.deleteActivity(item)}}>Delete activity</button>
                                 </div>
                             )
                         })}
@@ -97,6 +137,7 @@ class PatientDetails extends Component {
                                 <div>
                                     <h2>{getDateFormat(item.date)}</h2>
                                     <button onClick={() => {this.seeSessionModal(item)}}>See session</button>
+                                    <button onClick={() => {this.deleteSession(item)}}>Delete session</button>
                                 </div>
                             )
                         })}

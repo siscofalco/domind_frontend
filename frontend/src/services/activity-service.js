@@ -19,5 +19,9 @@ export default class ActivityService {
     editActivity(id, body) {
         return(this.instance.put(`/edit/${id}`, body))
     }
+
+    deleteActivity(id) {
+        return(this.instance.delete(`/${id}`));
+    }
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { withAuth } from '../../context/auth.context';
 import PatientService from '../../services/patient-service';
+import DiaryService from '../../services/diary-service';
 import BaseModal from '../../components/modals/BaseModal';
 import ActivityModal from '../../components/modals/ActivityModal';
 import DiaryModal from '../../components/modals/DiaryModal';
@@ -69,6 +70,18 @@ class PatientProfile extends Component {
         })
     }
 
+    deleteDiary(diary){
+        const id = diary._id;
+        const diaryService = new DiaryService();
+        diaryService.deleteDiary(id)
+        .then(() => {
+            this.getPatientData();
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
     render() {
         return(
             <div>
@@ -99,6 +112,7 @@ class PatientProfile extends Component {
                                 <div>
                                     <h2>{getDateFormat(item.date)}</h2>
                                     <button onClick={() => {this.openDiaryModal(item)}}>See diary</button>
+                                    <button onClick={() => {this.deleteDiary(item)}}>Delete diary</button>
                                 </div>
                             )
                         })}

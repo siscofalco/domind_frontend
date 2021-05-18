@@ -10,6 +10,11 @@ const UserSelector = (props) => {
             return (<Redirect to={`/patient-profile/${props.user.data._id}`} />)
         }
     }
+
+    setTimeout(() => {
+        window.location.reload();
+    }, 200);
+
     return <p>Loading...</p>
 }
 
