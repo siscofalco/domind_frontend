@@ -76,7 +76,6 @@ class Signup extends Component {
 
   handleSubmit(event){
     event.preventDefault();
-    console.log(this.state.fields);
     const data = {
         ...this.state.fields,
     };

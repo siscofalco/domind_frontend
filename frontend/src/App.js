@@ -13,8 +13,8 @@ function App() {
     <div className="App">
       <Route exact path="/" component={() => (<p>Hola</p>)} />
       <PrivateRoute exact path="/user-selector" component={UserSelector} />
-      <PrivateRoute path="/doctor-profile" component={DoctorProfile} />
-      <PrivateRoute path="/patient-profile" component={PatientProfile} />
+      <PrivateRoute path="/doctor-profile/:id" component={DoctorProfile} />
+      <PrivateRoute path="/patient-profile/:id" component={PatientProfile} />
       <AnonRoute exact path="/signup" component={Signup} />
       <AnonRoute exact path="/login" component={Login} />
     </div>

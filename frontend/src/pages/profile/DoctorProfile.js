@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { withAuth } from '../../context/auth.context';
 import DoctorService from '../../services/doctor-service';
 
@@ -7,18 +8,18 @@ class DoctorProfile extends Component {
         super(props);
 
         this.state = {
-            doctor: {},
+            doctor: {
+                patients: [],
+            },
         };
     }
 
-    componentDidMount(){
-        console.log(this.props);
-        const id = this.props.location.search.split('?id=')[1];
 
+    componentDidMount(){
+        const id = this.props.match.params.id;
         const doctorService = new DoctorService();
         doctorService.getDoctor(id)
         .then((response) => {
-            console.log(response)
             this.setState({
                 doctor: response.data,
             });
@@ -32,10 +33,22 @@ class DoctorProfile extends Component {
         return(
             <div>
                 <h1>{this.state.doctor.name}</h1>
+                <p>{this.state.doctor.email}</p>
+                <p>{this.state.doctor.mobilephone}</p>
+                <div>
+                    {this.state.doctor.patients.map((item) => {
+                        return(
+                            <div>
+                                <h2>{item.name}</h2>
+                                <a href={`/patient-profile/${item._id}`}>Show profile</a>
+                            </div>
+                        );
+                    })}
+                </div>
                 <button onClick={this.props.logout}>Log out</button>
             </div>
         )
     }
 }
 
-export default withAuth(DoctorProfile);
+export default withRouter(withAuth(DoctorProfile));
