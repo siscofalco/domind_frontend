@@ -12,8 +12,8 @@ export default class PatientService {
         return(this.instance.get(`/${id}`));
     }
 
-    editPatient(body) {
-        return(this.instance.put(body))
+    editPatient(id, body) {
+        return(this.instance.put(`/edit/${id}`, body))
     }
 
     deletePatient(id) {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { TextField, Button } from '@material-ui/core';
 import { withAuth } from '../../context/auth.context';
 
 const validators = {
@@ -58,18 +59,16 @@ class Login extends Component {
     return (
       <form onSubmit={(e) => this.handleSubmit(e)}>
         <div className="form-item">
-          <label htmlFor="username">Username: </label>
-          <input type="text" name="username" value={fields.username} onChange={(e) => this.handleChange(e)} />
+          <TextField type="text" placeholder="Username" name="username" value={fields.username} onChange={(e) => this.handleChange(e)} />
         </div>
 
         <div className="form-item">
-          <label htmlFor="password">Password: </label>
-          <input type="password" name="password" value={fields.password} onChange={(e) => this.handleChange(e)} />
+          <TextField type="password" placeholder="Password" name="password" value={fields.password} onChange={(e) => this.handleChange(e)} />
         </div>
 
-        <button type="submit">
+        <Button variant="outlined" color="primary" type="submit">
           Log in
-        </button>
+        </Button>
       </form>
     )
   }

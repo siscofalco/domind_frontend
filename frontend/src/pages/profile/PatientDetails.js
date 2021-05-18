@@ -9,6 +9,7 @@ import SeeActivityModal from '../../components/modals/SeeActivityModal';
 import CreateActivityModal from '../../components/modals/CreateActivityModal';
 import SessionModal from '../../components/modals/SessionModal';
 import { getDateFormat } from '../../helpers/helpers';
+import EditPatientModal from '../../components/modals/EditPatientModal';
 
 class PatientDetails extends Component {
     constructor(props){
@@ -23,6 +24,7 @@ class PatientDetails extends Component {
             currentActivity: {},
             isCreateActivityModalVisible: false,
             isSessionModalVisible: false,
+            isEditPatientModalVisible: false,
         };
     }
 
@@ -52,6 +54,7 @@ class PatientDetails extends Component {
         this.setState({
             isCreateActivityModalVisible: false,
             isSessionModalVisible: false,
+            isEditPatientModalVisible: false,
         });
     }
 
@@ -108,6 +111,7 @@ class PatientDetails extends Component {
                 <div>
                     <h1>{this.state.patient.name}</h1>
                     <p>{this.state.patient.email}</p>
+                    <button onClick={() => {this.setState({ isEditPatientModalVisible: true })}}>Edit patient</button>
                     <button onClick={() => {this.deletePatient(this)}}>Delete patient</button>
                 </div>
                 <div>
@@ -156,6 +160,9 @@ class PatientDetails extends Component {
                         isNew={!this.state.currentSession || !this.state.currentSession.comment}
                         patientId={this.state.patient._id}
                     />
+                </BaseModal>
+                <BaseModal visible={this.state.isEditPatientModalVisible} onModalClose={() => {this.onModalClose(this)}}>
+                    <EditPatientModal content={this.state.patient} />
                 </BaseModal>
             </div>
         )
