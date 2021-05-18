@@ -5,6 +5,8 @@ import PatientService from '../../services/patient-service';
 import BaseModal from '../../components/modals/BaseModal';
 import SeeActivityModal from '../../components/modals/SeeActivityModal';
 import CreateActivityModal from '../../components/modals/CreateActivityModal';
+import SessionModal from '../../components/modals/SessionModal';
+import { getDateFormat } from '../../helpers/helpers';
 
 class PatientDetails extends Component {
     constructor(props){
@@ -13,10 +15,12 @@ class PatientDetails extends Component {
         this.state = {
             patient: {
                 activities: [],
+                sessions: []
             },
             isSeeActivityModalVisible: false,
             currentActivity: {},
-            isCreateActivityModalVisible: false,  
+            isCreateActivityModalVisible: false,
+            isSessionModalVisible: false,
         };
     }
 
@@ -41,8 +45,23 @@ class PatientDetails extends Component {
         })
     }
 
+    onModalClose(){
+        this.getPatientData();
+        this.setState({
+            isCreateActivityModalVisible: false,
+            isSessionModalVisible: false,
+        });
+    }
+
     componentDidMount(){
         this.getPatientData();
+    }
+
+    seeSessionModal(session){
+        this.setState({
+            isSessionModalVisible: true,
+            currentSession: session
+        })
     }
 
     render() {
@@ -61,18 +80,41 @@ class PatientDetails extends Component {
                         {this.state.patient.activities.map((item) => {
                             return(
                                 <div>
-                                    <h2>{item.date}</h2>
-                                    <button onClick={() => {this.seeActivityModal(item)}}>See Activity</button>
+                                    <h2>{getDateFormat(item.date)}</h2>
+                                    <button onClick={() => {this.seeActivityModal(item)}}>See activity</button>
+                                </div>
+                            )
+                        })}
+                    </div>
+                <div>
+                    <div>
+                        <h2>Sessions</h2>
+                        <button onClick={() => {this.setState({isSessionModalVisible: true})}}>+</button>
+                    </div>
+                    <div>
+                        {this.state.patient.sessions.map((item) => {
+                            return(
+                                <div>
+                                    <h2>{getDateFormat(item.date)}</h2>
+                                    <button onClick={() => {this.seeSessionModal(item)}}>See session</button>
                                 </div>
                             )
                         })}
                     </div>
                 </div>
+                </div>
                 <BaseModal visible={this.state.isSeeActivityModalVisible} onModalClose={() => {this.setState({isSeeActivityModalVisible:false})}}>
                     <SeeActivityModal content={this.state.currentActivity} />
                 </BaseModal>
-                <BaseModal visible={this.state.isCreateActivityModalVisible} onModalClose={() => {this.setState({isCreateActivityModalVisible:false})}}>
-                    <CreateActivityModal />
+                <BaseModal visible={this.state.isCreateActivityModalVisible} onModalClose={() => {this.onModalClose(this)}}>
+                    <CreateActivityModal patientId={this.state.patient._id} />
+                </BaseModal>
+                <BaseModal visible={this.state.isSessionModalVisible} onModalClose={() => {this.onModalClose(this)}}>
+                    <SessionModal 
+                        content={this.state.currentSession}
+                        isNew={!this.state.currentSession || !this.state.currentSession.comment}
+                        patientId={this.state.patient._id}
+                    />
                 </BaseModal>
             </div>
         )

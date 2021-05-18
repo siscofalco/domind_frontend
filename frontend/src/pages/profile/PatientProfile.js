@@ -5,6 +5,7 @@ import PatientService from '../../services/patient-service';
 import BaseModal from '../../components/modals/BaseModal';
 import ActivityModal from '../../components/modals/ActivityModal';
 import DiaryModal from '../../components/modals/DiaryModal';
+import { getDateFormat } from '../../helpers/helpers';
 class PatientProfile extends Component {
     constructor(props){
         super(props);
@@ -81,7 +82,7 @@ class PatientProfile extends Component {
                         {this.state.patient.activities.map((item) => {
                             return(
                                 <div>
-                                    <h2>{item.date}</h2>
+                                    <h2>{getDateFormat(item.date)}</h2>
                                     {(!item.answers || !item.answers.length) ?
                                         (<button onClick={() => {this.openActivityModal(item)}}>Do activity</button>) : null}
                                 </div>
@@ -96,7 +97,7 @@ class PatientProfile extends Component {
                         {this.state.patient.diary.map((item) => {
                             return(
                                 <div>
-                                    <h2>{item.date}</h2>
+                                    <h2>{getDateFormat(item.date)}</h2>
                                     <button onClick={() => {this.openDiaryModal(item)}}>See diary</button>
                                 </div>
                             )

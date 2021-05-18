@@ -8,6 +8,10 @@ export default class ActivityService {
         })
     }
 
+    createActivity(body){
+        return(this.instance.post('/create', body))
+    }
+
     getActivity(id){
         return(this.instance.get(`/${id}`));
     }
