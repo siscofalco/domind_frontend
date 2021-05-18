@@ -1,4 +1,4 @@
-import React, { Component, useLayoutEffect } from 'react';
+import React, { Component } from 'react';
 import ActivityService from '../../services/activity-service'
 import './BaseModal.css';
 

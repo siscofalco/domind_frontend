@@ -39,7 +39,7 @@ class DoctorProfile extends Component {
                         return(
                             <div>
                                 <h2>{item.name}</h2>
-                                <a href={`/patient-profile/${item._id}`}>Show profile</a>
+                                <a href={`/patient-details/${item._id}`}>Show profile</a>
                             </div>
                         );
                     })}

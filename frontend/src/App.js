@@ -7,6 +7,7 @@ import UserSelector from './components/UserSelector';
 import './App.css';
 import DoctorProfile from './pages/profile/DoctorProfile';
 import PatientProfile from './pages/profile/PatientProfile';
+import PatientDetails from './pages/profile/PatientDetails';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <PrivateRoute exact path="/user-selector" component={UserSelector} />
       <PrivateRoute path="/doctor-profile/:id" component={DoctorProfile} />
       <PrivateRoute path="/patient-profile/:id" component={PatientProfile} />
+      <PrivateRoute path="/patient-details/:id" component={PatientDetails} />
       <AnonRoute exact path="/signup" component={Signup} />
       <AnonRoute exact path="/login" component={Login} />
     </div>
