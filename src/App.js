@@ -1,5 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
+import Logout from './pages/login/Logout';
 import Signup from './pages/signup/Signup';
 import SignupPatient from './pages/signup/SignupPatient';
 import AnonRoute from './components/routes/AnonRoutes';
@@ -22,6 +23,7 @@ function App() {
       <PrivateRoute path="/new-patient" component={SignupPatient} />
       <AnonRoute exact path="/signup" component={Signup} />
       <AnonRoute exact path="/login" component={Login} />
+      <Route exact path="/logout" component={Logout} />
     </div>
   );
 }

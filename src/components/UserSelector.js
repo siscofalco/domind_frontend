@@ -3,6 +3,7 @@ import { Redirect } from 'react-router'
 import { withAuth } from '../context/auth.context'
 
 const UserSelector = (props) => {
+    console.log(props);
     if (props.user.data) {
         if (Array.isArray(props.user.data.patients)) { // Is a doctor
             return (<Redirect to={`/doctor-profile/${props.user.data._id}`} />)
