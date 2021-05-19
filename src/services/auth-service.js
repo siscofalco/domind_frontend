@@ -8,6 +8,10 @@ export default class AuthService {
         })
     }
 
+    signupPatient(data){
+        return(this.instance.post('/signup-patient', data)); 
+    }
+
     signup(data){
         return(this.instance.post('/signup-doctor', data)); 
     }

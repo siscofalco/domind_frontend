@@ -61,7 +61,6 @@ class Signup extends Component {
         email: "",
         password: "",
         mobilephone: null,
-        email: "",
       },
       errors: {
         username: null,
@@ -69,7 +68,6 @@ class Signup extends Component {
         email: null,
         password: null,
         mobilephone: null,
-        email: null,
       }
     }
   }
