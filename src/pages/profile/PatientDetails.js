@@ -62,6 +62,7 @@ class PatientDetails extends Component {
             isCreateActivityModalVisible: false,
             isSessionModalVisible: false,
             isEditPatientModalVisible: false,
+            currentSession: {},
         });
     }
 
