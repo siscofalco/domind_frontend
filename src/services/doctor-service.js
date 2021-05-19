@@ -13,6 +13,6 @@ export default class DoctorService {
     }
 
     editDoctor(body) {
-        return(this.instance.put(body))
+        return(this.instance.put(`/edit`, body))
     }
 }

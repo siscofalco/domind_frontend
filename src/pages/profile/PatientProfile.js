@@ -7,6 +7,15 @@ import BaseModal from '../../components/modals/BaseModal';
 import ActivityModal from '../../components/modals/ActivityModal';
 import DiaryModal from '../../components/modals/DiaryModal';
 import { getDateFormat } from '../../helpers/helpers';
+
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import AnnouncementIcon from '@material-ui/icons/Announcement';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import DeleteIcon from '@material-ui/icons/Delete';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+
+import './Profile.css';
+
 class PatientProfile extends Component {
     constructor(props){
         super(props);
@@ -85,40 +94,46 @@ class PatientProfile extends Component {
     render() {
         return(
             <div>
-                <div>
+                <div className="userDetails">
                     <h1>{this.state.patient.name}</h1>
-                    <h1>{this.state.patient.email}</h1>
+                    <div className="userDetailsRow">
+                        <span>{this.state.patient.email}</span>
+                    </div>
                 </div>
                 <div>
-                    <h2>Activities</h2>
-                    <div>
+                    <div className="sectionTitleContainer">
+                        <h2 className="sectionTitle">Activities</h2>
+                    </div>                    <div className="list">
                         {this.state.patient.activities.map((item) => {
                             return(
-                                <div>
-                                    <h2>{getDateFormat(item.date)}</h2>
+                                <div className="listRow">
+                                    <span className="listRowTitle">{getDateFormat(item.date)}</span>
                                     {(!item.answers || !item.answers.length) ?
-                                        (<button onClick={() => {this.openActivityModal(item)}}>Do activity</button>) : null}
+                                        (<div onClick={() => {this.openActivityModal(item)}}><AnnouncementIcon /></div>) : <CheckBoxIcon />}
                                 </div>
                             )
                         })}
                     </div>
                 </div>
                 <div>
-                    <h2>Diaries</h2>
-                    <button onClick={() => {this.newDiary()}}>+</button>
-                    <div>
+                    <div className="sectionTitleContainer">
+                        <h2 className="sectionTitle">Diaries</h2>
+                        <div onClick={() => {this.newDiary()}}><AddCircleIcon /></div>
+                    </div>
+                    <div className="list">
                         {this.state.patient.diary.map((item) => {
                             return(
-                                <div>
-                                    <h2>{getDateFormat(item.date)}</h2>
-                                    <button onClick={() => {this.openDiaryModal(item)}}>See diary</button>
-                                    <button onClick={() => {this.deleteDiary(item)}}>Delete diary</button>
+                                <div className="listRow">
+                                    <div className="listPack">
+                                        <span className="listRowTitle">{getDateFormat(item.date)}</span>
+                                        <div onClick={() => {this.openDiaryModal(item)}}><VisibilityIcon /></div>
+                                    </div>
+                                    <div onClick={() => {this.deleteDiary(item)}}><DeleteIcon /></div>
                                 </div>
                             )
                         })}
                     </div>
                 </div>
-                <button onClick={this.props.logout}>Log out</button>
                 <BaseModal visible={this.state.isActivityModalVisible} onModalClose={() => {this.onCloseModal(this)}}>
                     <ActivityModal content={this.state.currentActivity} />
                 </BaseModal>

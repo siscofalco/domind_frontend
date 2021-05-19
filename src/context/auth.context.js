@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthService from '../services/auth-service';
+import CachedIcon from '@material-ui/icons/Cached';
 
 const { Consumer, Provider } = React.createContext();
 
@@ -62,7 +63,7 @@ class AuthProvider extends React.Component {
   render(){
     const { isLoggedIn, isLoading, user } = this.state;
 
-    if(isLoading) return <p>Loading...</p>;
+    if(isLoading) return <div className="loadingContainer"><CachedIcon /></div>;
 
     return (
       <Provider value={{ isLoading, isLoggedIn, user, signup: this.signup, login: this.login, logout: this.logout, edit: this.edit }}>

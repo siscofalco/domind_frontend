@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ActivityService from '../../services/activity-service'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import './BaseModal.css';
 
 class ActivityModal extends Component {
@@ -43,7 +44,7 @@ class ActivityModal extends Component {
 
     render(){
         if (this.state.isSuccess) {
-            return "ok";
+            return (<CheckCircleIcon />);
         } else {
             return(
                 <div>

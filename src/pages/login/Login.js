@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TextField, Button } from '@material-ui/core';
 import { withAuth } from '../../context/auth.context';
+import './Login.css';
 
 const validators = {
   username: (value) => {
@@ -57,19 +58,24 @@ class Login extends Component {
   render() {
     const { fields } = this.state;
     return (
-      <form onSubmit={(e) => this.handleSubmit(e)}>
-        <div className="form-item">
-          <TextField type="text" placeholder="Username" name="username" value={fields.username} onChange={(e) => this.handleChange(e)} />
-        </div>
+      <div className="login">
+        <span className="title">Domind</span>
+        <span className="subtitle">Mental health noseque</span>
+        <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
+          <div className="form-item">
+            <TextField type="text" placeholder="Username" name="username" value={fields.username} onChange={(e) => this.handleChange(e)} />
+          </div>
 
-        <div className="form-item">
-          <TextField type="password" placeholder="Password" name="password" value={fields.password} onChange={(e) => this.handleChange(e)} />
-        </div>
+          <div className="form-item">
+            <TextField type="password" placeholder="Password" name="password" value={fields.password} onChange={(e) => this.handleChange(e)} />
+          </div>
 
-        <Button variant="outlined" color="primary" type="submit">
-          Log in
-        </Button>
-      </form>
+          <Button variant="outlined" color="primary" type="submit">
+            Log in
+          </Button>
+        </form>
+        <a className="footer" href="/signup">Are you a doctor? Create your account here</a>
+      </div>
     )
   }
 }

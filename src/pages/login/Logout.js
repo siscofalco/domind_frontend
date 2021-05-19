@@ -2,9 +2,11 @@ import AuthService from "../../services/auth-service"
 
 const Logout = () => {
     const authService = new AuthService();
-    authService.logout();
+    authService.logout().then(() => {
+        window.location.href = '/login';
+    });
 
-    return 'Logout';
+    return '';
 }
 
 export default Logout;

@@ -1,5 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
 .App {
-  text-align: center;
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.appContent {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  padding: 8px 20px;
 }
 
 .App-logo {
@@ -7,10 +20,40 @@
   pointer-events: none;
 }
 
+.MuiSvgIcon-root {
+  color: rgba(0,0,0,0.8);
+  cursor: pointer;
+}
+
+.MuiSvgIcon-root:hover {
+  color: black;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingContainer > * {
+  width: 100px !important;
+  height: 100px !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+textarea {
+  resize: none;
 }
 
 .App-header {

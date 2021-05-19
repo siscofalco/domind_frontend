@@ -10,14 +10,17 @@ class SeeActivity extends Component {
 
         return(
             <div>
-                {this.props.content.questions.map((item, index) => {
-                    return(
-                        <div>
-                            <h3>{item}</h3>
-                            <p>{haveAnswers ? this.props.content.answers[index] : 'No answer'}</p>
-                        </div>
-                    )
-                })}
+                <div className="modalTitle">Activity</div>
+                <div>
+                    {this.props.content.questions.map((item, index) => {
+                        return(
+                            <div>
+                                <h3>{item}</h3>
+                                <p>{haveAnswers ? this.props.content.answers[index] : 'No answer'}</p>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         )
     }

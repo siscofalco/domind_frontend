@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DiaryService from '../../services/diary-service';
+import { Button } from '@material-ui/core';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 class DiaryModal extends Component {
     constructor(props){
@@ -36,12 +38,12 @@ class DiaryModal extends Component {
 
     render(){
         if(this.state.isSuccess){
-            return ( "ok")
+            return (<CheckCircleIcon />)
         } else {
             return (
-                <div>
-                    <input readOnly={!this.props.isNew} value={this.state.text} onChange={(e) => {this.onTextChange(e.target.value)}}/>
-                    {this.props.isNew ? <button onClick={() => { this.createDiary(this); }}>Send</button> : null}
+                <div className="textModal">
+                    <textarea readOnly={!this.props.isNew} value={this.state.text} onChange={(e) => {this.onTextChange(e.target.value)}}/>
+                    {this.props.isNew ? <Button onClick={() => { this.createDiary(this); }}>Send</Button> : null}
                 </div>
             )
         }

@@ -1,0 +1,67 @@
+.sectionTitle {
+    font-size: 36px;
+    margin: 0;
+}
+
+.sectionTitleContainer {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid gray;
+    padding: 40px 0 16px 0;
+}
+
+.sectionTitleContainer > div {
+    margin-right: 8px;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    border-bottom: 1px solid gray;
+    padding-bottom: 12px;
+}
+
+.userDetailsRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userDetailsRow > * {
+    margin-right: 8px;
+}
+
+.list {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    width: 90%;
+    position: relative;
+    padding-top: 8px;
+}
+
+.listPack {
+    display: flex;
+}
+
+.listPack > * {
+    margin-right: 8px;
+}
+
+.listRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 8px;
+    position: relative;
+}
+
+.listRow:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+.listRowTitle {
+    font-size: 20px;
+}

@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
-import PatientService from '../../services/patient-service';
-import { getInputDateFormat } from '../../helpers/helpers';
+import DoctorService from '../../services/doctor-service';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { TextField, Button } from '@material-ui/core';
 
-class EditPatientModal extends Component {
+class EditDoctorModal extends Component {
     constructor(props){
         super(props);
 
-        const { name, username, email, birthdate } = props.content;
-        console.log(getInputDateFormat(birthdate))
+        const { name, username, email, mobilephone } = props.content;
+
         this.state = {
             name,
             username,
             email,
-            birthdate: getInputDateFormat(birthdate),
+            mobilephone,
             isSuccess: false,
         };
     }
@@ -31,17 +30,17 @@ class EditPatientModal extends Component {
         this.setState({ email: value });
     }
 
-    onBirthdateChange(value) {
-        this.setState({ birthdate: value });
+    onMobilephoneChange(value) {
+        this.setState({ mobilephone: value });
     }
 
-    editPatient() {
-        const patientService = new PatientService();
-        patientService.editPatient(this.props.content._id, {
+    editDoctor() {
+        const doctorService = new DoctorService();
+        doctorService.editDoctor({
             username: this.state.username,
             name: this.state.name,
             email: this.state.email,
-            birthdate: new Date(this.state.birthdate),
+            mobilephone:this.state.mobilephone,
         }).then(() => {
             this.setState({isSuccess: true});
         })
@@ -63,13 +62,13 @@ class EditPatientModal extends Component {
                         <label>Email:</label><TextField value={this.state.email} onChange={(e) => {this.onEmailChange(e.target.value)}} />
                     </div>
                     <div className="modalRow">
-                        <label>Birthdate:</label><TextField value={this.state.birthdate} type="date" onChange={(e) => {this.onBirthdateChange(e.target.value)}} />
+                        <label>Mobilephone:</label><TextField value={this.state.mobilephone} type="tel" onChange={(e) => {this.onMobilephoneChange(e.target.value)}} />
                     </div>
-                    <Button variant="outlined" color="primary" onClick={() => {this.editPatient(this)}}>Send</Button>
+                    <Button variant="outlined" color="primary" onClick={() => {this.editDoctor(this)}}>Send</Button>
                 </div>
             )
         }
     }
 }
 
-export default EditPatientModal;
+export default EditDoctorModal;

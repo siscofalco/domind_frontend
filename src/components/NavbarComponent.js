@@ -1,8 +1,11 @@
 import React from 'react';
 import { withAuth } from '../context/auth.context';
+import HomeIcon from '@material-ui/icons/Home';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import './NavbarComponent.css';
 
 const Navbar = (props) => {
-
     if (!props.user || !props.user.data || !props.user.data.username) {
         return null;
     }
@@ -13,9 +16,9 @@ const Navbar = (props) => {
 
     return (
         <div className="navbar-container">
-            <div className="navbar-item" onClick={() => {redirectTo('/user-selector');}}>Profile</div>
-            {(props.user.data.patients && Array.isArray(props.user.data.patients) ? (<div className="navbar-item" onClick={() => {redirectTo('/new-patient');}}>New Patient</div>) : null)}
-            <div className="navbar-item" onClick={() => {redirectTo('/logout');}}>Logout</div>
+            <div className={`navbar-item ${!window.location.href.includes('/new-patient') ? 'selected' : ''}`} onClick={() => {redirectTo('/user-selector');}}><HomeIcon /></div>
+            {(props.user.data.patients && Array.isArray(props.user.data.patients) ? (<div className={`navbar-item ${window.location.href.includes('new-patient') ? 'selected' : ''}`} onClick={() => {redirectTo('/new-patient');}}><PersonAddIcon /></div>) : null)}
+            <div className="navbar-item" onClick={() => {redirectTo('/logout');}}><ExitToAppIcon /></div>
         </div>
     )
 }

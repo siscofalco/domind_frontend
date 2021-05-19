@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CloseIcon from '@material-ui/icons/Close';
 import './BaseModal.css';
 
 class BaseModal extends Component {
@@ -11,6 +12,7 @@ class BaseModal extends Component {
             return(
                 <div className="modal-background" onClick={this.props.onModalClose}>
                     <div className="modal-container" onClick={(e) => {e.stopPropagation()}}>
+                        <div className="modalCloseButton" onClick={this.props.onModalClose}><CloseIcon /></div>
                         {this.props.children}
                     </div>
                 </div>

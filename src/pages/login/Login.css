@@ -1,0 +1,36 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 60px;
+    height: 100px;
+}
+
+.subtitle {
+    font-size: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-item {
+    margin-bottom: 24px;
+}
+
+.footer {
+    font-size: 14px;
+}

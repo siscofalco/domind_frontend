@@ -11,6 +11,13 @@ import SessionModal from '../../components/modals/SessionModal';
 import { getDateFormat } from '../../helpers/helpers';
 import EditPatientModal from '../../components/modals/EditPatientModal';
 
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import DeleteIcon from '@material-ui/icons/Delete';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import EditIcon from '@material-ui/icons/Edit';
+
+import './Profile.css';
+
 class PatientDetails extends Component {
     constructor(props){
         super(props);
@@ -108,45 +115,53 @@ class PatientDetails extends Component {
     render() {
         return(
             <div>
-                <div>
+                <div className="userDetails">
                     <h1>{this.state.patient.name}</h1>
-                    <p>{this.state.patient.email}</p>
-                    <button onClick={() => {this.setState({ isEditPatientModalVisible: true })}}>Edit patient</button>
-                    <button onClick={() => {this.deletePatient(this)}}>Delete patient</button>
+                    <div className="userDetailsRow">
+                        <div className="listPack">
+                            <span>{this.state.patient.email}</span>
+                            <div onClick={() => {this.setState({ isEditPatientModalVisible: true })}}><EditIcon /></div>
+                        </div>
+                        <div onClick={() => {this.deletePatient(this)}}><DeleteIcon /></div>
+                    </div>
                 </div>
                 <div>
-                    <div>
-                        <h2>Activities</h2>
-                        <button onClick={()=>{this.setState({isCreateActivityModalVisible: true})}}>+</button>
+                    <div className="sectionTitleContainer">
+                        <h2 className="sectionTitle">Activities</h2>
+                        <div onClick={()=>{this.setState({isCreateActivityModalVisible: true})}}><AddCircleIcon /></div>
                     </div>
-                    <div>
+                    <div className="list">
                         {this.state.patient.activities.map((item) => {
                             return(
-                                <div>
-                                    <h2>{getDateFormat(item.date)}</h2>
-                                    <button onClick={() => {this.seeActivityModal(item)}}>See activity</button>
-                                    <button onClick={() => {this.deleteActivity(item)}}>Delete activity</button>
+                                <div className="listRow">
+                                    <div className="listPack">
+                                        <span className="listRowTitle">{getDateFormat(item.date)}</span>
+                                        <div onClick={() => {this.seeActivityModal(item)}}><VisibilityIcon /></div>
+                                    </div>
+                                    <div onClick={() => {this.deleteActivity(item)}}><DeleteIcon /></div>
                                 </div>
                             )
                         })}
                     </div>
-                <div>
                     <div>
-                        <h2>Sessions</h2>
-                        <button onClick={() => {this.setState({isSessionModalVisible: true})}}>+</button>
+                        <div className="sectionTitleContainer">
+                            <h2 className="sectionTitle">Sessions</h2>
+                            <div onClick={() => {this.setState({isSessionModalVisible: true})}}><AddCircleIcon /></div>
+                        </div>
+                        <div className="list">
+                            {this.state.patient.sessions.map((item) => {
+                                return(
+                                    <div className="listRow">
+                                        <div className="listPack">
+                                            <span className="listRowTitle">{getDateFormat(item.date)}</span>
+                                            <div onClick={() => {this.seeSessionModal(item)}}><VisibilityIcon /></div>
+                                        </div>
+                                        <div onClick={() => {this.deleteSession(item)}}><DeleteIcon /></div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                    <div>
-                        {this.state.patient.sessions.map((item) => {
-                            return(
-                                <div>
-                                    <h2>{getDateFormat(item.date)}</h2>
-                                    <button onClick={() => {this.seeSessionModal(item)}}>See session</button>
-                                    <button onClick={() => {this.deleteSession(item)}}>Delete session</button>
-                                </div>
-                            )
-                        })}
-                    </div>
-                </div>
                 </div>
                 <BaseModal visible={this.state.isSeeActivityModalVisible} onModalClose={() => {this.setState({isSeeActivityModalVisible:false})}}>
                     <SeeActivityModal content={this.state.currentActivity} />

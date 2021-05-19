@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import ActivityService from '../../services/activity-service'
+import { TextField, Button } from '@material-ui/core';
+
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 class CreateActivityModal extends Component {
     constructor(props){
@@ -53,19 +57,22 @@ class CreateActivityModal extends Component {
 
     render(){
         if(this.state.isSuccess){
-            return("Ok")
+            return(<CheckCircleIcon />)
         } else {
             return(
-                <div>
-                    <div>
+                <div className="createActivityModal">
+                    <div className="createActivityModalList">
                         {this.state.questions.map((item, index) => {
                             return(
-                                <input value={item} onChange={(e) => {this.onTextChange(e.target.value, index)}}/>
+                                <div className="modalRow">
+                                    <TextField placeholder="Question..." value={item} onChange={(e) => {this.onTextChange(e.target.value, index)}}/>
+                                    {index === this.state.questions.length - 1 ? (<div onClick={()=>{this.addNewQuestion(this)}}><AddCircleOutlineIcon /></div>) : null}
+                                </div>
                             )
                         })}
-                        <button onClick={()=>{this.addNewQuestion(this)}}>Add new question</button>
+                        
                     </div>
-                    <button onClick={() => {this.sendQuestions(this)}}>Send</button>
+                    <Button variant="outlined" color="primary" onClick={() => {this.sendQuestions(this)}}>Send</Button>
                 </div>
             )
         }
