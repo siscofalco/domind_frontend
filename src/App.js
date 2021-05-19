@@ -16,15 +16,15 @@ function App() {
   return (
     <div className="App">
       <NavbarComponent />
-        <Route exact path="/" component={() => (<Redirect to="/login" />)} />
-        <PrivateRoute exact path="/user-selector" component={UserSelector} />
-        <PrivateRoute path="/doctor-profile/:id" component={DoctorProfile} />
-        <PrivateRoute path="/patient-profile/:id" component={PatientProfile} />
-        <PrivateRoute path="/patient-details/:id" component={PatientDetails} />
-        <PrivateRoute path="/new-patient" component={SignupPatient} />
-        <AnonRoute exact path="/signup" component={Signup} />
-        <AnonRoute exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
+      <Route exact path="/" component={() => (<Redirect to="/login" />)} />
+      <PrivateRoute exact path="/user-selector" component={UserSelector} />
+      <PrivateRoute path="/doctor-profile/:id" component={DoctorProfile} />
+      <PrivateRoute path="/patient-profile/:id" component={PatientProfile} />
+      <PrivateRoute path="/patient-details/:id" component={PatientDetails} />
+      <PrivateRoute path="/new-patient" component={SignupPatient} />
+      <AnonRoute exact path="/signup" component={Signup} />
+      <AnonRoute exact path="/login" component={Login} />
+      <Route exact path="/logout" component={Logout} />
     </div>
   );
 }
