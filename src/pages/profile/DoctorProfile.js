@@ -63,14 +63,14 @@ class DoctorProfile extends Component {
                         <h2 className="sectionTitle">Patients</h2>
                     </div>
                     <div className="list">
-                        {this.state.doctor.patients.map((item) => {
+                        {this.state.doctor.patients.length ? this.state.doctor.patients.map((item) => {
                             return(
                                 <div className="listRow">
                                     <span className="listRowTitle">{item.name}</span>
                                     <a href={`/patient-details/${item._id}`}><ArrowForwardIcon /></a>
                                 </div>
                             );
-                        })}
+                        }) : 'You have no patients'}
                     </div>
                 </div>
                 <BaseModal visible={this.state.isEditDoctorModalVisible} onModalClose={() => {this.onModalClose(this)}}>

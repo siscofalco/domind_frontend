@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import ActivityService from '../../services/activity-service'
+import ActivityService from '../../services/activity-service';
+import { Button } from '@material-ui/core';
+
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import './BaseModal.css';
 
@@ -47,7 +49,7 @@ class ActivityModal extends Component {
             return (<CheckCircleIcon />);
         } else {
             return(
-                <div>
+                <div className="activityModal">
                     <div>
                         {this.props.content.questions.map((item, index) => {
                             return(
@@ -58,7 +60,7 @@ class ActivityModal extends Component {
                             )
                         })}
                     </div>
-                    <button onClick={() => { this.sendAnswers(this); }}>Send answers</button>
+                    <Button variant="outlined" color="primary" onClick={() => { this.sendAnswers(this); }}>Send</Button>
                 </div>
             )
         }

@@ -103,3 +103,15 @@
 .textModal > button {
     margin-top: 20px;
 }
+
+.activityModal {
+    display: flex;
+    flex-direction: column;
+}
+
+.activityModal button {
+    margin-top: 14px;
+    justify-self: center;
+    width: auto;
+    align-self: center;
+}

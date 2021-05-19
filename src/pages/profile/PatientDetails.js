@@ -132,7 +132,7 @@ class PatientDetails extends Component {
                         <div onClick={()=>{this.setState({isCreateActivityModalVisible: true})}}><AddCircleIcon /></div>
                     </div>
                     <div className="list">
-                        {this.state.patient.activities.map((item) => {
+                        {this.state.patient.activities.length ? this.state.patient.activities.map((item) => {
                             return(
                                 <div className="listRow">
                                     <div className="listPack">
@@ -142,7 +142,7 @@ class PatientDetails extends Component {
                                     <div onClick={() => {this.deleteActivity(item)}}><DeleteIcon /></div>
                                 </div>
                             )
-                        })}
+                        }) : 'This patient has no activities'}
                     </div>
                     <div>
                         <div className="sectionTitleContainer">
@@ -150,7 +150,7 @@ class PatientDetails extends Component {
                             <div onClick={() => {this.setState({isSessionModalVisible: true})}}><AddCircleIcon /></div>
                         </div>
                         <div className="list">
-                            {this.state.patient.sessions.map((item) => {
+                            {this.state.patient.sessions.length ? this.state.patient.sessions.map((item) => {
                                 return(
                                     <div className="listRow">
                                         <div className="listPack">
@@ -160,7 +160,7 @@ class PatientDetails extends Component {
                                         <div onClick={() => {this.deleteSession(item)}}><DeleteIcon /></div>
                                     </div>
                                 )
-                            })}
+                            }) : 'This patient has no sessions'}
                         </div>
                     </div>
                 </div>

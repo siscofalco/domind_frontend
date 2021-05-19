@@ -60,7 +60,7 @@ class Login extends Component {
     return (
       <div className="login">
         <span className="title">Domind</span>
-        <span className="subtitle">Mental health noseque</span>
+        <span className="subtitle">Mental health dashboard</span>
         <form className="form" onSubmit={(e) => this.handleSubmit(e)}>
           <div className="form-item">
             <TextField type="text" placeholder="Username" name="username" value={fields.username} onChange={(e) => this.handleChange(e)} />

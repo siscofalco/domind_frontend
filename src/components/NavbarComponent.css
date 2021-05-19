@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 60px;
-    background-color: aquamarine;
+    background-color: #3B4768;
     position: relative;
 }
 
@@ -19,9 +19,13 @@
 }
 
 .navbar-item.selected {
-    background-color: cadetblue;
+    background-color: #252C41;
 }
 
 .navbar-item:hover {
-    background-color: cadetblue;
+    background-color: #252C41;
+}
+
+.navbar-item > .MuiSvgIcon-root {
+    color: white;
 }

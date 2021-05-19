@@ -104,7 +104,7 @@ class PatientProfile extends Component {
                     <div className="sectionTitleContainer">
                         <h2 className="sectionTitle">Activities</h2>
                     </div>                    <div className="list">
-                        {this.state.patient.activities.map((item) => {
+                        {this.state.patient.activities.length ? this.state.patient.activities.map((item) => {
                             return(
                                 <div className="listRow">
                                     <span className="listRowTitle">{getDateFormat(item.date)}</span>
@@ -112,7 +112,7 @@ class PatientProfile extends Component {
                                         (<div onClick={() => {this.openActivityModal(item)}}><AnnouncementIcon /></div>) : <CheckBoxIcon />}
                                 </div>
                             )
-                        })}
+                        }) : 'You have no activities'}
                     </div>
                 </div>
                 <div>
@@ -121,7 +121,7 @@ class PatientProfile extends Component {
                         <div onClick={() => {this.newDiary()}}><AddCircleIcon /></div>
                     </div>
                     <div className="list">
-                        {this.state.patient.diary.map((item) => {
+                        {this.state.patient.length ? this.state.patient.diary.map((item) => {
                             return(
                                 <div className="listRow">
                                     <div className="listPack">
@@ -131,7 +131,7 @@ class PatientProfile extends Component {
                                     <div onClick={() => {this.deleteDiary(item)}}><DeleteIcon /></div>
                                 </div>
                             )
-                        })}
+                        }) : 'You have no diaries'}
                     </div>
                 </div>
                 <BaseModal visible={this.state.isActivityModalVisible} onModalClose={() => {this.onCloseModal(this)}}>
