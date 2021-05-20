@@ -9,6 +9,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import EditIcon from '@material-ui/icons/Edit';
 
 import './Profile.css';
+import { TextField } from '@material-ui/core';
 
 class DoctorProfile extends Component {
     constructor(props){
@@ -18,6 +19,7 @@ class DoctorProfile extends Component {
             doctor: {
                 patients: [],
             },
+            searchPatients: [],
             isEditDoctorModalVisible: false,
         };
     }
@@ -29,6 +31,7 @@ class DoctorProfile extends Component {
         .then((response) => {
             this.setState({
                 doctor: response.data,
+                searchPatients: response.data.patients,
             });
         })
         .catch((error) => {
@@ -47,6 +50,20 @@ class DoctorProfile extends Component {
         });
     }
 
+    onSearchChanged(value) {
+        const filteredArray = this.state.doctor.patients.filter((item) => {
+            const lowercaseName = item.name.toLowerCase();
+            if (lowercaseName.includes(value.toLowerCase())) {
+                return true;
+            }
+            return false;
+        });
+        this.setState({
+            searchText: value,
+            searchPatients: filteredArray,
+        });
+    }
+
     render() {
         return(
             <div>
@@ -61,9 +78,10 @@ class DoctorProfile extends Component {
                 <div>
                     <div className="sectionTitleContainer">
                         <h2 className="sectionTitle">Patients</h2>
+                        <TextField value={this.state.searchText} variant="outlined" placeholder="Search..." onChange={(e) => {this.onSearchChanged(e.target.value);}} />
                     </div>
                     <div className="list">
-                        {this.state.doctor.patients.length ? this.state.doctor.patients.map((item) => {
+                        {this.state.searchPatients.length ? this.state.searchPatients.map((item) => {
                             return(
                                 <div className="listRow">
                                     <span className="listRowTitle">{item.name}</span>

@@ -121,7 +121,7 @@ class PatientProfile extends Component {
                         <div onClick={() => {this.newDiary()}}><AddCircleIcon /></div>
                     </div>
                     <div className="list">
-                        {this.state.patient.length ? this.state.patient.diary.map((item) => {
+                        {this.state.patient.diary.length ? this.state.patient.diary.map((item) => {
                             return(
                                 <div className="listRow">
                                     <div className="listPack">

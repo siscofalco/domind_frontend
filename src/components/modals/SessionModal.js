@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import SessionService from '../../services/session-service';
 import { Button } from '@material-ui/core';
+import { getDateFormat } from '../../helpers/helpers';
+
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 class SessionModal extends Component {
@@ -10,6 +12,7 @@ class SessionModal extends Component {
         if(this.props.content && this.props.content.comment){
             this.state = {
                 text: this.props.content.comment,
+                date: this.props.content.date,
                 isSuccess: false,
             }
         } else {
@@ -42,6 +45,7 @@ class SessionModal extends Component {
         } else {
             return (
                 <div className="textModal">
+                    {!this.props.isNew ? <div className="modalTitle">{getDateFormat(this.state.date)}</div> : null}
                     <textarea readOnly={!this.props.isNew} value={this.state.text} onChange={(e) => {this.onTextChange(e.target.value)}}/>
                     {this.props.isNew ? <Button onClick={() => { this.createSession(this); }}>Send</Button> : null}
                 </div>

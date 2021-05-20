@@ -71,3 +71,7 @@
 .listRowTitle {
     font-size: 20px;
 }
+
+.MuiOutlinedInput-input {
+    padding: 12px 14px;
+}
