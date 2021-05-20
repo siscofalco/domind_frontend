@@ -117,7 +117,7 @@ class PatientDetails extends Component {
         return(
             <div>
                 <div className="userDetails">
-                    <h1>{this.state.patient.name}</h1>
+                    <h1 className="name">{this.state.patient.name}</h1>
                     <div className="userDetailsRow">
                         <div className="listPack">
                             <span>{this.state.patient.email}</span>

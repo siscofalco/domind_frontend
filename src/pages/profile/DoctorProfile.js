@@ -51,7 +51,7 @@ class DoctorProfile extends Component {
         return(
             <div>
                 <div className="userDetails">
-                    <h1>{this.state.doctor.name}</h1>
+                    <h1 className="name">{this.state.doctor.name}</h1>
                     <div className="userDetailsRow">
                         <span>{this.state.doctor.email}</span>
                         <span>{this.state.doctor.mobilephone}</span>

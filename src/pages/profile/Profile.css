@@ -1,3 +1,7 @@
+.name{
+    font-size: 45px;
+}
+
 .sectionTitle {
     font-size: 36px;
     margin: 0;
@@ -60,8 +64,10 @@
 }
 
 .listRow:hover {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
 }
+
 .listRowTitle {
     font-size: 20px;
 }
